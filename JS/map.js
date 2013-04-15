@@ -4,13 +4,12 @@
 // Context of canvas -> Drawing stuff into the canvas.
 var context;
    
-// Get the tiles image
-var tiles = new Image();
-tiles.src = ".../images/tiles.jpg";
+// For drawing and store the tiles.
+var tiles;
 
 // Global vars for drawing single tile (the exact location in the canvas)
 var latestX = -60;
-var latestY = -60;
+var latestY = 0;
 
 var howManyTilesInALine = 0;
 var newLine = false;
@@ -27,61 +26,55 @@ function map(mapTiles, canvas) {
 	function draw() {
 	
 		// Loop trough the tiles array (two dimensional).
-		for (var i = 0; i < canvas.width / 60; i++) {
-		
-			for (var y = 0; y < canvas.height / 60; y++) {
-				
+		for (var i = 0; i < canvas.height / 60; i++) {
+
+			for (var y = 0; y < canvas.width / 60; y++) {
+
 				/* Tiles?  	- Exit
 							- Floor
 							- Computer
 							- Box rack
 							- Box
 							- Wall
-							-> Can be found in the images directory (.../img/tiles.jpg).
+							-> Can be found in the images directory (.../images/tiles.jpg).
 				*/
-				if (mapTiles[i][y] !== null) {
-				
-					switch (mapTiles[i][y])	{
+				switch (mapTiles[i][y])	{
 					
-						// Exit -- e
-						case "e":
+					// Exit -- e
+					case "e":
 						
-							drawTile(0, 0, 60, 60);
-						break;
+						drawTile(0, 0, 60, 60);
+					break;
 					
-						// Floor -- f
-						case "f":
+					// Floor -- f
+					case "f":
 					
-							drawTile(60, 0, 120, 60);
-						break;
+						drawTile(60, 0, 120, 60);
+					break;
 					
-						// Computer -- c
-						case "c":
+					// Computer -- c
+					case "c":
 					
-							drawTile(120, 0, 180, 60);
-						break;
+						drawTile(120, 0, 180, 60);
+					break;
 					
-						// Box rack -- br
-						case "br":
+					// Box rack -- br
+					case "br":
 					
-							drawTile(0, 60, 60, 120);
-						break;
+						drawTile(0, 60, 60, 120);
+					break;
 					
-						// Box -- b
-						case "b":
+					// Box -- b
+					case "b":
+								
+						drawTile(60, 60, 120, 120);
+					break;
 					
-							drawTile(60, 60, 120, 120);
-						break;
-					
-						// Wall -- w
-						case "w":
-					
-							drawTile(120, 60, 180, 120);
-						break;
-					}
-				} else {
-				
-					fillTile();
+					// Wall -- w
+					case "w":
+
+						drawTile(120, 60, 180, 120);
+					break;
 				}
 			}
 		}
@@ -91,24 +84,28 @@ function map(mapTiles, canvas) {
 
 	// Class used for draw a single tile.
 	function drawTile(cutX, cutY, cutXX, cutYY) {
-
+				
 		howManyTilesInALine++;
 		latestX += 60;
 	
 		if (newLine) {
-		
+
 			latestY += 60;
 		
-			// Restore line
 			newLine = false;
-		
+			
 		// Checks if a new line is needed or not.
 		} else if (howManyTilesInALine == (canvas.width / 60) - 60) {
 		
 			newLine = true;
 		}
-
-		context.drawImage(tiles, cutX, cutY, cutXX, cutYY, latestX, latestY);
+		
+		// NOT FINISHED YET!!!
+		
+		/* // Draw and slice the tile.
+		var tiles = new Image();
+		context.drawImage(tiles);
+		tiles.src = ".../images/tiles.jpg");*/
 	}
 	
 	this.fillTile = fillTile;
