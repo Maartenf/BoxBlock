@@ -4,5 +4,5 @@ var mapTiles;
 
 $(document).ready(function() {
 	
-	var map = new Map(mapTiles);
+	var map = new Map(mapTiles, canvasContext);
 });
