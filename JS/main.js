@@ -1,8 +1,13 @@
-var canvasContext = $("canvas").getContext("2d");
+/* Contains the main functions.
+   File: main.js */
 
-var mapTiles;
+// This is the map.
+var mapTiles = [["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]];
 
 $(document).ready(function() {
 	
-	var map = new Map(mapTiles, canvasContext);
+	var canvas = document.getElementById("theCanvas");
+	
+	var theMap = new map(mapTiles, canvas);
+	theMap.draw();
 });
